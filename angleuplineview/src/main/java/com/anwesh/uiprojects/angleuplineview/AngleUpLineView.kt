@@ -169,4 +169,27 @@ class AngleUpLineView(ctx : Context) : View(ctx){
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : AngleUpLineView) {
+
+        private val animator : Animator = Animator(view)
+
+        private val angleUpLine : AngleUpLine = AngleUpLine(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#BDBDBD"))
+            angleUpLine.draw(canvas, paint)
+            animator.animate {
+                angleUpLine.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            angleUpLine.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
