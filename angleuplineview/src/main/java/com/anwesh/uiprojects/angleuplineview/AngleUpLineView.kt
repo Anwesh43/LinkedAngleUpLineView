@@ -4,6 +4,7 @@ package com.anwesh.uiprojects.angleuplineview
  * Created by anweshmishra on 25/08/18.
  */
 
+import android.app.Activity
 import android.view.View
 import android.view.MotionEvent
 import android.graphics.Paint
@@ -11,7 +12,7 @@ import android.graphics.Canvas
 import android.content.Context
 import android.graphics.Color
 
-val nodes : Int = 5
+val nodes : Int = 6
 
 fun Canvas.drawAULNode(i : Int, scale : Float, paint : Paint) {
     val h : Float = height.toFloat()
@@ -192,6 +193,14 @@ class AngleUpLineView(ctx : Context) : View(ctx){
             angleUpLine.startUpdating {
                 animator.start()
             }
+        }
+    }
+
+    companion object {
+        fun create(activity : Activity) : AngleUpLineView {
+            val view : AngleUpLineView = AngleUpLineView(activity)
+            activity.setContentView(view)
+            return view
         }
     }
 }
